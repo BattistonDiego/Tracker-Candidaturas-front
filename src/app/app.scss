@@ -1,0 +1,80 @@
+.shell {
+  display: flex;
+  height: 100dvh;
+}
+.sidebar {
+  width: 240px;
+  flex-shrink: 0;
+  background-color: #fff;
+  border-right: 1px solid #e3e5ea;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  .tracker-candidaturas,
+  .quadro,
+  .estatisticas {
+    width: 207px;
+    height: 36px;
+    font-size: 14px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .tracker-candidaturas {
+    margin-bottom: 26px;
+  }
+
+  .quadro,
+  .estatisticas {
+    margin-bottom: 6px;
+    color: #5a5f6b;
+    border-radius: 8px;
+    padding: 6px;
+    text-decoration: none;
+  }
+
+  .quadro.active,
+  .estatisticas.active {
+    background-color: #eef0f3;
+    // color: #4f46e5;
+    color: #16181d;
+  }
+
+  .theme-selector {
+    width: 215px;
+    height: 38px;
+    border-radius: 8px;
+    border: 1px solid #e3e5ea;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px;
+    font-size: 12px;
+    gap: 3px;
+    background-color: #f8f9fb;
+
+    .light,
+    .dark {
+      width: 50%;
+      height: 28px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    .light {
+      background-color: #fff;
+    }
+  }
+}
+.content {
+  flex: 1;
+  min-width: 0;
+  overflow: auto;
+}
