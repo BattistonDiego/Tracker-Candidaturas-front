@@ -1,0 +1,24 @@
+<div class="quadro">
+  <div class="topo">
+    <div class="titulo">
+      <h1>Quadro</h1>
+      <p>8 candidaturas em andamento</p>
+    </div>
+    <div class="busca">
+      <input type="text" placeholder="Buscar empresa ou cargo" spellcheck="false" />
+      <button><img src="add-icon.svg" alt="" /> Nova candidatura</button>
+    </div>
+  </div>
+
+  <section class="colunas">
+    @for (coluna of colunas; track coluna.status) {
+      <div class="item-col">
+        <div class="item-top">
+          <h2>{{ coluna.title }}</h2>
+
+          <div class="quantidade">3</div>
+        </div>
+      </div>
+    }
+  </section>
+</div>

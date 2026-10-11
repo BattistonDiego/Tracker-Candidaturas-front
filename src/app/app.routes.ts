@@ -1,14 +1,15 @@
 import { Routes } from '@angular/router';
-import { QuadroComponent } from './features/quadro-component/quadro-component';
-import { EstatisticasComponent } from './features/estatisticas-component/estatisticas-component';
+import { Quadro } from './features/quadro/quadro';
+import { Estatisticas } from './features/estatisticas/estatisticas';
 
 export const routes: Routes = [
+  { path: '', redirectTo: 'quadro', pathMatch: 'full' },
   {
     path: 'quadro',
-    component: QuadroComponent,
+    component: Quadro,
   },
   {
     path: 'estatisticas',
-    component: EstatisticasComponent,
+    component: Estatisticas,
   },
 ];
