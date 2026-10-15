@@ -23,27 +23,6 @@ export class Quadro {
 
   tecnologias = signal<string[]>([]);
 
-  candidaturasTeste = signal<Candidatura[]>([
-    {
-      id: 1,
-      empresa: 'Nubank',
-      cargo: 'Desenvolvedor Front-end Pleno',
-      dataCandidatura: new Date(2026, 8, 28),
-      status: 'candidatado',
-      tecnologias: ['Angular', 'TypeScript', 'RxJS'],
-      plataforma: 'LinkedIn',
-    },
-    {
-      id: 2,
-      empresa: 'iFood',
-      cargo: 'Engenheira de Software Frontend',
-      dataCandidatura: new Date(2026, 8, 30),
-      status: 'candidatado',
-      tecnologias: ['React', 'TypeScript', 'GraphQL'],
-      plataforma: 'Site da empresa',
-    },
-  ]);
-
   candidaturas: Candidatura[] = [
     {
       id: 1,
