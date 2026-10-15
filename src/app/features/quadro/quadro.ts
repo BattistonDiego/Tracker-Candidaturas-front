@@ -1,7 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { Candidatura, StatusCandidatura } from '../../shared/models/candidatura';
 import { CdkDragDrop, DragDropModule } from '@angular/cdk/drag-drop';
+import { inject } from '@angular/core';
+import { Dialog } from '@angular/cdk/dialog';
+import { NovaCandidatura } from './nova-candidatura/nova-candidatura';
 
 @Component({
   imports: [DatePipe, DragDropModule],
@@ -17,6 +20,29 @@ export class Quadro {
     { title: 'Oferta', status: 'ofertado' },
     { title: 'Recusada', status: 'recusada' },
   ];
+
+  tecnologias = signal<string[]>([]);
+
+  candidaturasTeste = signal<Candidatura[]>([
+    {
+      id: 1,
+      empresa: 'Nubank',
+      cargo: 'Desenvolvedor Front-end Pleno',
+      dataCandidatura: new Date(2026, 8, 28),
+      status: 'candidatado',
+      tecnologias: ['Angular', 'TypeScript', 'RxJS'],
+      plataforma: 'LinkedIn',
+    },
+    {
+      id: 2,
+      empresa: 'iFood',
+      cargo: 'Engenheira de Software Frontend',
+      dataCandidatura: new Date(2026, 8, 30),
+      status: 'candidatado',
+      tecnologias: ['React', 'TypeScript', 'GraphQL'],
+      plataforma: 'Site da empresa',
+    },
+  ]);
 
   candidaturas: Candidatura[] = [
     {
@@ -93,6 +119,8 @@ export class Quadro {
     },
   ];
 
+  private dialog = inject(Dialog);
+
   data = new Date();
 
   candidaturasDa(status: StatusCandidatura): Candidatura[] {
@@ -102,5 +130,19 @@ export class Quadro {
   soltar(event: CdkDragDrop<StatusCandidatura>) {
     const candidatura = event.item.data as Candidatura;
     candidatura.status = event.container.data;
+  }
+
+  openModal() {
+    const ref = this.dialog.open<Omit<Candidatura, 'id'>>(NovaCandidatura, {
+      width: '560px',
+      height: '700px',
+      panelClass: 'modal-nova-candidatura',
+    });
+
+    ref.closed.subscribe((resultado) => {
+      if (resultado) {
+        console.log(resultado);
+      }
+    });
   }
 }

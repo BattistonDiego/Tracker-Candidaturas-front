@@ -1,0 +1,178 @@
+:host {
+  --cor-borda: #e3e5ea;
+  --cor-fundo-campo: #f8f9fb;
+  --cor-texto-suave: #5a5f6b;
+  --cor-destaque: #4c5fd5;
+  --cor-erro: #e5484d;
+}
+
+.cabecalho {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+
+  h2 {
+    font-size: 16px;
+  }
+  p {
+    font-size: 14px;
+    color: #5a5f6b;
+  }
+
+  img {
+    cursor: pointer;
+  }
+}
+
+.divisor {
+  border: none;
+  border-top: 1px solid #e3e5ea;
+  margin: 16px -20px; // -20px nas laterais, igual ao padding do modal
+}
+
+.rodape {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  padding: 0px 20px;
+}
+
+.btn-cancelar,
+.btn-salvar {
+  height: 40px;
+  padding: 0 20px;
+  border-radius: 8px;
+  font: inherit;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.btn-cancelar {
+  background: #fff;
+  border: 1px solid var(--cor-borda);
+  color: #333;
+}
+
+.btn-salvar {
+  background: var(--cor-destaque);
+  border: none;
+  color: #fff;
+}
+
+// ---------- Formulário ----------
+.formulario {
+  height: 513px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 5px 20px;
+  overflow-y: auto;
+}
+
+.linha {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0; // evita que um campo estique a coluna do grid
+
+  > span {
+    font-size: 14px;
+    font-weight: 500;
+
+    b {
+      color: var(--cor-destaque);
+    }
+  }
+
+  small {
+    font-size: 12px;
+    color: #7d828d;
+  }
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--cor-borda);
+  border-radius: 8px;
+  background: var(--cor-fundo-campo);
+  font: inherit; // inputs não herdam a fonte por padrão
+  font-size: 14px;
+  color: #333;
+  outline: none;
+
+  &::placeholder {
+    color: #9ca3af;
+  }
+
+  &:focus-visible {
+    border-color: var(--cor-destaque);
+    box-shadow: 0 0 0 3px rgba(76, 95, 213, 0.15);
+  }
+
+  &.ng-invalid.ng-touched {
+    border-color: var(--cor-erro);
+  }
+}
+
+textarea {
+  resize: vertical;
+  height: 66px;
+}
+
+// ---------- Chips de tecnologias ----------
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 8px;
+  border: 1px solid var(--cor-borda);
+  border-radius: 8px;
+  background: var(--cor-fundo-campo);
+
+  &:focus-within {
+    border-color: var(--cor-destaque);
+    box-shadow: 0 0 0 3px rgba(76, 95, 213, 0.15);
+  }
+
+  // o input de dentro "some" para parecer parte do contêiner
+  input {
+    flex: 1;
+    min-width: 120px;
+    padding: 4px;
+    border: none;
+    background: transparent;
+    box-shadow: none;
+  }
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  background: #fff;
+  border: 1px solid var(--cor-borda);
+  border-radius: 6px;
+  font-size: 12px;
+  white-space: nowrap;
+
+  button {
+    border: none;
+    background: transparent;
+    padding: 0;
+    font-size: 14px;
+    line-height: 1;
+    color: #7d828d;
+    cursor: pointer;
+  }
+}

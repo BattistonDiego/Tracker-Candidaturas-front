@@ -1,0 +1,86 @@
+<header class="cabecalho">
+  <div>
+    <h2>Nova Candidatura</h2>
+    <p>Ela será adicionada à coluna "Candidatado".</p>
+  </div>
+
+  <img src="close-icon.svg" alt="" (click)="closeModal()" />
+</header>
+
+<div class="divisor"></div>
+
+<form [formGroup]="form" (ngSubmit)="salvar()">
+  <div class="formulario">
+    <div class="linha">
+      <label class="campo">
+        <span>Empresa <b>*</b></span>
+        <input formControlName="empresa" placeholder="Ex.: Nubank" />
+      </label>
+      <label class="campo">
+        <span>Cargo <b>*</b></span>
+        <input formControlName="cargo" placeholder="Ex.: Desenvolvedor Front-end" />
+      </label>
+    </div>
+
+    <label class="campo">
+      <span>Link da vaga</span>
+      <input formControlName="linkVaga" placeholder="https://" />
+    </label>
+
+    <div class="linha">
+      <label class="campo">
+        <span>Data de candidatura <b>*</b></span>
+        <input type="date" formControlName="dataCandidatura" />
+      </label>
+      <label class="campo">
+        <span>Plataforma</span>
+        <select formControlName="plataforma">
+          @for (p of plataformas; track p) {
+            <option [value]="p">{{ p }}</option>
+          }
+        </select>
+      </label>
+    </div>
+
+    <div class="campo">
+      <span>Tecnologias</span>
+      <div class="chips">
+        @for (tec of tecnologias(); track tec) {
+          <span class="chip">
+            {{ tec }}
+            <button type="button" (click)="removerTec(tec)" aria-label="Remover">×</button>
+          </span>
+        }
+        <input
+          #tecInput
+          placeholder="Angular, TypeScript..."
+          spellcheck="false"
+          (keydown.enter)="adicionarTec($event, tecInput)"
+          (keydown.comma)="adicionarTec($event, tecInput)"
+        />
+      </div>
+      <small>Pressione Enter ou vírgula para adicionar</small>
+    </div>
+
+    <label class="campo">
+      <span>Contato</span>
+      <input formControlName="contato" placeholder="Nome, e-mail ou LinkedIn do recrutador" />
+    </label>
+
+    <label class="campo">
+      <span>Observação</span>
+      <textarea
+        formControlName="observacao"
+        rows="3"
+        placeholder="Anotações sobre a vaga, salário, próximos passos..."
+      ></textarea>
+    </label>
+  </div>
+
+  <hr class="divisor" />
+
+  <footer class="rodape">
+    <button type="button" class="btn-cancelar" (click)="closeModal()">Cancelar</button>
+    <button type="submit" class="btn-salvar">Salvar</button>
+  </footer>
+</form>
