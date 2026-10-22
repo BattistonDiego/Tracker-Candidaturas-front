@@ -1,9 +1,6 @@
 :host {
-  --cor-borda: #e3e5ea;
-  --cor-fundo-campo: #f8f9fb;
-  --cor-texto-suave: #5a5f6b;
-  --cor-destaque: #4c5fd5;
-  --cor-erro: #e5484d;
+  display: block;
+  color: var(--cor-texto);
 }
 
 .cabecalho {
@@ -16,7 +13,7 @@
   }
   p {
     font-size: 14px;
-    color: #5a5f6b;
+    color: var(--cor-texto-suave);
   }
 
   img {
@@ -26,7 +23,7 @@
 
 .divisor {
   border: none;
-  border-top: 1px solid #e3e5ea;
+  border-top: 1px solid var(--cor-borda);
   margin: 16px -20px; // -20px nas laterais, igual ao padding do modal
 }
 
@@ -48,9 +45,9 @@
 }
 
 .btn-cancelar {
-  background: #fff;
+  background: var(--cor-superficie);
   border: 1px solid var(--cor-borda);
-  color: #333;
+  color: var(--cor-texto);
 }
 
 .btn-salvar {
@@ -92,7 +89,7 @@
 
   small {
     font-size: 12px;
-    color: #7d828d;
+    color: var(--cor-texto-mudo);
   }
 }
 
@@ -103,14 +100,14 @@ textarea {
   padding: 10px 12px;
   border: 1px solid var(--cor-borda);
   border-radius: 8px;
-  background: var(--cor-fundo-campo);
+  background: var(--cor-superficie-secundaria);
   font: inherit; // inputs não herdam a fonte por padrão
   font-size: 14px;
-  color: #333;
+  color: var(--cor-texto-campo);
   outline: none;
 
   &::placeholder {
-    color: #9ca3af;
+    color: var(--cor-placeholder);
   }
 
   &:focus-visible {
@@ -137,7 +134,7 @@ textarea {
   padding: 6px 8px;
   border: 1px solid var(--cor-borda);
   border-radius: 8px;
-  background: var(--cor-fundo-campo);
+  background: var(--cor-superficie-secundaria);
 
   &:focus-within {
     border-color: var(--cor-destaque);
@@ -160,7 +157,7 @@ textarea {
   align-items: center;
   gap: 4px;
   padding: 2px 8px;
-  background: #fff;
+  background: var(--cor-superficie);
   border: 1px solid var(--cor-borda);
   border-radius: 6px;
   font-size: 12px;
@@ -172,7 +169,7 @@ textarea {
     padding: 0;
     font-size: 14px;
     line-height: 1;
-    color: #7d828d;
+    color: var(--cor-texto-mudo);
     cursor: pointer;
   }
 }

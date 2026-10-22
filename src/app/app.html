@@ -16,8 +16,24 @@
     </div>
 
     <div class="theme-selector">
-      <div class="light"><img src="light-icon.svg" alt="" />Claro</div>
-      <div class="dark"><img src="dark-icon.svg" alt="" /> Escuro</div>
+      <button
+        type="button"
+        class="light"
+        [class.active]="theme() === 'light'"
+        [attr.aria-pressed]="theme() === 'light'"
+        (click)="setTheme('light')"
+      >
+        <img src="light-icon.svg" alt="" />Claro
+      </button>
+      <button
+        type="button"
+        class="dark"
+        [class.active]="theme() === 'dark'"
+        [attr.aria-pressed]="theme() === 'dark'"
+        (click)="setTheme('dark')"
+      >
+        <img src="dark-icon.svg" alt="" /> Escuro
+      </button>
     </div>
   </aside>
   <main class="content">

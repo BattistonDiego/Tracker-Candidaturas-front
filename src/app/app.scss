@@ -5,8 +5,8 @@
 .sidebar {
   width: 240px;
   flex-shrink: 0;
-  background-color: #fff;
-  border-right: 1px solid #e3e5ea;
+  background-color: var(--cor-superficie);
+  border-right: 1px solid var(--cor-borda);
   padding: 15px;
   display: flex;
   flex-direction: column;
@@ -31,7 +31,7 @@
   .quadro,
   .estatisticas {
     margin-bottom: 6px;
-    color: #5a5f6b;
+    color: var(--cor-texto-suave);
     border-radius: 8px;
     padding: 6px;
     text-decoration: none;
@@ -39,23 +39,22 @@
 
   .quadro.active,
   .estatisticas.active {
-    background-color: #eef0f3;
-    // color: #4f46e5;
-    color: #16181d;
+    background-color: var(--cor-superficie-selecionada);
+    color: var(--cor-texto);
   }
 
   .theme-selector {
     width: 215px;
     height: 38px;
     border-radius: 8px;
-    border: 1px solid #e3e5ea;
+    border: 1px solid var(--cor-borda);
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 5px;
     font-size: 12px;
     gap: 3px;
-    background-color: #f8f9fb;
+    background-color: var(--cor-superficie-secundaria);
 
     .light,
     .dark {
@@ -66,10 +65,17 @@
       gap: 5px;
       justify-content: center;
       cursor: pointer;
+      border: 0;
+      border-radius: 6px;
+      background: transparent;
+      color: var(--cor-texto-suave);
+      font: inherit;
     }
 
-    .light {
-      background-color: #fff;
+    .light.active,
+    .dark.active {
+      background-color: var(--cor-superficie);
+      color: var(--cor-texto);
     }
   }
 }

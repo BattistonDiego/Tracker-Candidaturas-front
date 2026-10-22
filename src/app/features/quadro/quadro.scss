@@ -1,11 +1,4 @@
 :host {
-  --cor-fundo: #f8f9fb;
-  --cor-borda: #e3e5ea;
-  --cor-texto-suave: #5a5f6b;
-  --cor-texto-mudo: #7d828d;
-  --cor-destaque: #4c5fd5;
-  --cor-destaque-fundo: #eaedfd;
-
   display: block;
   height: 100%;
 }
@@ -13,6 +6,7 @@
 .quadro {
   height: 100%;
   background-color: var(--cor-fundo);
+  color: var(--cor-texto);
   display: flex;
   flex-direction: column;
 }
@@ -48,11 +42,12 @@
     border: 1px solid var(--cor-borda);
     border-radius: 8px;
     outline: none;
-    color: #555567;
-    box-shadow: 1px 1px 6px rgba(16, 24, 40, 0.05);
+    background-color: var(--cor-superficie);
+    color: var(--cor-texto-busca);
+    box-shadow: var(--sombra-sutil);
 
     &::placeholder {
-      color: #9ca3af;
+      color: var(--cor-placeholder);
     }
   }
 
@@ -89,7 +84,7 @@
   display: flex;
   flex-direction: column;
 
-  background-color: #fff;
+  background-color: var(--cor-superficie);
   border: 1px solid var(--cor-borda);
   border-radius: 20px;
 }
@@ -112,7 +107,7 @@
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  background-color: #eef0f3;
+  background-color: var(--cor-superficie-selecionada);
   font-size: 12px;
   color: var(--cor-texto-suave);
 }
@@ -148,7 +143,7 @@
   // estados do drag-and-drop (classes do CDK)
   &.cdk-drag-preview {
     cursor: grabbing;
-    box-shadow: 0 12px 24px rgba(16, 24, 40, 0.15);
+    box-shadow: var(--sombra-arraste);
     transform: rotate(2deg);
   }
 
@@ -171,7 +166,7 @@
 .chip {
   height: 19px;
   padding: 1px 7px;
-  background-color: #fff;
+  background-color: var(--cor-superficie);
   border-radius: 6px;
   font-size: 12px;
   white-space: nowrap;
