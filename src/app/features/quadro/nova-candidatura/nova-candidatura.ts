@@ -2,7 +2,7 @@ import { DialogRef } from '@angular/cdk/dialog';
 import { DIALOG_DATA } from '@angular/cdk/dialog';
 import { Component, inject, signal } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { Candidatura, PLATAFORMAS, PlataformaApi } from '../../../shared/models/candidatura';
+import { Candidatura, CandidaturaRequest, PLATAFORMAS, Plataforma } from '../../../shared/models/candidatura';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CandidaturaService } from '../../../shared/services/candidatura.service';
 
@@ -29,7 +29,7 @@ export class NovaCandidatura {
     cargo: [this.candidatura?.cargo ?? '', Validators.required],
     linkVaga: [this.candidatura?.linkVaga ?? ''],
     dataCandidatura: [this.toDateInput(this.candidatura?.dataCandidatura), Validators.required],
-    plataforma: [this.candidatura?.plataforma ?? ('LINKEDIN' as PlataformaApi), Validators.required],
+    plataforma: [this.candidatura?.plataforma ?? ('LINKEDIN' as Plataforma), Validators.required],
     contato: [this.candidatura?.contato ?? ''],
     observacao: [this.candidatura?.observacao ?? ''],
   });
@@ -45,14 +45,13 @@ export class NovaCandidatura {
     }
 
     const values = this.form.getRawValue();
-    const candidatura: Omit<Candidatura, 'id'> = {
+    const candidatura: CandidaturaRequest = {
       ...values,
-      linkVaga: values.linkVaga || undefined,
-      contato: values.contato || undefined,
-      observacao: values.observacao || undefined,
-      dataCandidatura: this.parseDateInput(values.dataCandidatura),
+      linkVaga: values.linkVaga || null,
+      contato: values.contato || null,
+      observacao: values.observacao || null,
       tecnologias: this.tecnologias(),
-      status: this.candidatura?.status ?? 'candidatado',
+      status: this.candidatura?.status ?? 'CANDIDATADO',
     };
 
     this.salvando.set(true);
@@ -83,13 +82,7 @@ export class NovaCandidatura {
     this.tecnologias.update((lista) => lista.filter((t) => t !== tec));
   }
 
-  private toDateInput(date?: Date): string {
-    if (!date) return '';
-    return [date.getFullYear(), String(date.getMonth() + 1).padStart(2, '0'), String(date.getDate()).padStart(2, '0')].join('-');
-  }
-
-  private parseDateInput(value: string): Date {
-    const [year, month, day] = value.split('-').map(Number);
-    return new Date(year, month - 1, day);
+  private toDateInput(date?: string | null): string {
+    return date ?? '';
   }
 }

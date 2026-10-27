@@ -1,6 +1,6 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { DatePipe } from '@angular/common';
-import { Candidatura, StatusCandidatura } from '../../shared/models/candidatura';
+import { Candidatura, StatusCandidatura, STATUS_COLUNAS } from '../../shared/models/candidatura';
 import { CdkDragDrop, DragDropModule } from '@angular/cdk/drag-drop';
 import { Dialog } from '@angular/cdk/dialog';
 import { NovaCandidatura } from './nova-candidatura/nova-candidatura';
@@ -16,16 +16,7 @@ import { ConfirmationDialog } from '../../shared/components/confirmation-dialog/
   templateUrl: './quadro.html',
 })
 export class Quadro implements OnInit {
-  readonly colunas: { title: string; status: StatusCandidatura }[] = [
-    { title: 'Candidatado', status: 'candidatado' },
-    { title: 'Entrevista com RH/Bate papo', status: 'entrevistaRH' },
-    { title: 'Entrevista Técnica', status: 'entrevistaTec' },
-    { title: 'Oferta', status: 'ofertado' },
-    { title: 'Recusada', status: 'recusada' },
-    { title: 'Aceita', status: 'aceita' },
-    { title: 'Sem resposta', status: 'semResposta' },
-    { title: 'Desisti', status: 'desisti' },
-  ];
+  readonly colunas = STATUS_COLUNAS;
 
   private dialog = inject(Dialog);
   private readonly candidaturaService = inject(CandidaturaService);
@@ -65,7 +56,9 @@ export class Quadro implements OnInit {
       next: (atualizada) => this.atualizarNaLista(atualizada),
       error: () => {
         this.atualizarNaLista({ ...candidatura, status: statusAnterior });
-        this.mensagemErro.set('Não foi possível atualizar o status. A candidatura voltou à coluna anterior.');
+        this.mensagemErro.set(
+          'Não foi possível atualizar o status. A candidatura voltou à coluna anterior.',
+        );
       },
     });
   }
@@ -106,7 +99,8 @@ export class Quadro implements OnInit {
 
       this.mensagemErro.set('');
       this.candidaturaService.excluir(candidatura.id).subscribe({
-        next: () => this.candidaturas.update((lista) => lista.filter((item) => item.id !== candidatura.id)),
+        next: () =>
+          this.candidaturas.update((lista) => lista.filter((item) => item.id !== candidatura.id)),
         error: () => this.mensagemErro.set('Não foi possível excluir a candidatura.'),
       });
     });

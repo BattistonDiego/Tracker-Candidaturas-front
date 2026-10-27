@@ -1,14 +1,4 @@
 export type StatusCandidatura =
-  | 'candidatado'
-  | 'entrevistaRH'
-  | 'entrevistaTec'
-  | 'ofertado'
-  | 'aceita'
-  | 'recusada'
-  | 'semResposta'
-  | 'desisti';
-
-export type StatusApiCandidatura =
   | 'CANDIDATADO'
   | 'ENTREVISTARH'
   | 'ENTREVISTATEC'
@@ -18,73 +8,35 @@ export type StatusApiCandidatura =
   | 'SEMRESPOSTA'
   | 'DESISTI';
 
-export type PlataformaApi =
+export type Plataforma =
   | 'LINKEDIN'
   | 'GUPY'
   | 'CATHO'
   | 'INFOJOBS'
   | 'INDEED'
-  | 'OUTRO'
-  | 'Site da empresa'
-  | 'Indicação';
+  | 'SITE_DA_EMPRESA'
+  | 'INDICACAO'
+  | 'OUTRO';
 
-export type Plataforma = PlataformaApi;
+export const STATUS_COLUNAS: { readonly status: StatusCandidatura; readonly title: string }[] = [
+  { title: 'Candidatado', status: 'CANDIDATADO' },
+  { title: 'Entrevista com RH/Bate papo', status: 'ENTREVISTARH' },
+  { title: 'Entrevista Técnica', status: 'ENTREVISTATEC' },
+  { title: 'Oferta', status: 'OFERTADO' },
+  { title: 'Recusada', status: 'RECUSADA' },
+  { title: 'Aceita', status: 'ACEITA' },
+  { title: 'Sem resposta', status: 'SEMRESPOSTA' },
+  { title: 'Desisti', status: 'DESISTI' },
+];
 
-export interface CandidaturaApi {
-  id: number;
-  empresa: string;
-  cargo: string;
-  linkVaga: string | null;
-  dataCandidatura: string;
-  status: StatusApiCandidatura;
-  tecnologias: string[];
-  plataforma: PlataformaApi;
-  contato: string | null;
-  observacao: string | null;
-}
-
-export interface CandidaturaRequest {
-  empresa: string;
-  cargo: string;
-  linkVaga: string | null;
-  dataCandidatura: string;
-  status: StatusApiCandidatura;
-  tecnologias: string[];
-  plataforma: PlataformaApi;
-  contato: string | null;
-  observacao: string | null;
-}
-
-export const STATUS_PARA_API: Record<StatusCandidatura, StatusApiCandidatura> = {
-  candidatado: 'CANDIDATADO',
-  entrevistaRH: 'ENTREVISTARH',
-  entrevistaTec: 'ENTREVISTATEC',
-  ofertado: 'OFERTADO',
-  aceita: 'ACEITA',
-  recusada: 'RECUSADA',
-  semResposta: 'SEMRESPOSTA',
-  desisti: 'DESISTI',
-};
-
-export const STATUS_DA_API: Record<StatusApiCandidatura, StatusCandidatura> = {
-  CANDIDATADO: 'candidatado',
-  ENTREVISTARH: 'entrevistaRH',
-  ENTREVISTATEC: 'entrevistaTec',
-  OFERTADO: 'ofertado',
-  ACEITA: 'aceita',
-  RECUSADA: 'recusada',
-  SEMRESPOSTA: 'semResposta',
-  DESISTI: 'desisti',
-};
-
-export const PLATAFORMAS: { valor: PlataformaApi; rotulo: string }[] = [
+export const PLATAFORMAS: { readonly valor: Plataforma; readonly rotulo: string }[] = [
   { valor: 'LINKEDIN', rotulo: 'LinkedIn' },
   { valor: 'GUPY', rotulo: 'Gupy' },
   { valor: 'CATHO', rotulo: 'Catho' },
   { valor: 'INFOJOBS', rotulo: 'InfoJobs' },
   { valor: 'INDEED', rotulo: 'Indeed' },
-  { valor: 'Site da empresa', rotulo: 'Site da empresa' },
-  { valor: 'Indicação', rotulo: 'Indicação' },
+  { valor: 'SITE_DA_EMPRESA', rotulo: 'Site da empresa' },
+  { valor: 'INDICACAO', rotulo: 'Indicação' },
   { valor: 'OUTRO', rotulo: 'Outro' },
 ];
 
@@ -92,11 +44,13 @@ export interface Candidatura {
   id: number;
   empresa: string;
   cargo: string;
-  linkVaga?: string;
-  dataCandidatura: Date;
+  linkVaga: string | null;
+  dataCandidatura: string;
   status: StatusCandidatura;
   tecnologias: string[];
-  plataforma: PlataformaApi;
-  contato?: string;
-  observacao?: string;
+  plataforma: Plataforma;
+  contato: string | null;
+  observacao: string | null;
 }
+
+export type CandidaturaRequest = Omit<Candidatura, 'id'>;

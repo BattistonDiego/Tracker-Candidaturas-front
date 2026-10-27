@@ -6,7 +6,9 @@
     </div>
     <div class="busca">
       <input type="text" placeholder="Buscar empresa ou cargo" spellcheck="false" />
-      <button type="button" (click)="abrirModal()"><img src="add-icon.svg" alt="" /> Nova candidatura</button>
+      <button type="button" (click)="abrirModal()">
+        <img src="add-icon.svg" alt="" /> Nova candidatura
+      </button>
     </div>
   </div>
 
@@ -34,11 +36,27 @@
         >
           @for (c of candidaturasDa(coluna.status); track c.id) {
             <div class="card" cdkDrag [cdkDragData]="c" cdkDragPreviewContainer="parent">
-              <div class="acoes-card" (pointerdown)="$event.stopPropagation()" (click)="$event.stopPropagation()">
-                <button type="button" class="acao-icone" (click)="abrirModal(c)" aria-label="Editar candidatura" title="Editar candidatura">
+              <div
+                class="acoes-card"
+                (pointerdown)="$event.stopPropagation()"
+                (click)="$event.stopPropagation()"
+              >
+                <button
+                  type="button"
+                  class="acao-icone"
+                  (click)="abrirModal(c)"
+                  aria-label="Editar candidatura"
+                  title="Editar candidatura"
+                >
                   <app-icon name="edit" />
                 </button>
-                <button type="button" class="acao-icone acao-excluir" (click)="excluir(c)" aria-label="Excluir candidatura" title="Excluir candidatura">
+                <button
+                  type="button"
+                  class="acao-icone acao-excluir"
+                  (click)="excluir(c)"
+                  aria-label="Excluir candidatura"
+                  title="Excluir candidatura"
+                >
                   <app-icon name="delete" />
                 </button>
               </div>
