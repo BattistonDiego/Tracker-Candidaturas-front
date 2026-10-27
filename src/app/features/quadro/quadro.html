@@ -2,13 +2,20 @@
   <div class="topo">
     <div class="titulo">
       <h1>Quadro</h1>
-      <p>8 candidaturas em andamento</p>
+      <p>{{ candidaturas().length }} candidaturas</p>
     </div>
     <div class="busca">
       <input type="text" placeholder="Buscar empresa ou cargo" spellcheck="false" />
-      <button (click)="openModal()"><img src="add-icon.svg" alt="" /> Nova candidatura</button>
+      <button type="button" (click)="abrirModal()"><img src="add-icon.svg" alt="" /> Nova candidatura</button>
     </div>
   </div>
+
+  @if (carregando()) {
+    <p role="status" class="mensagem-estado">Carregando candidaturas…</p>
+  }
+  @if (mensagemErro()) {
+    <p role="alert" class="mensagem-estado">{{ mensagemErro() }}</p>
+  }
 
   <section class="colunas" cdkDropListGroup>
     @for (coluna of colunas; track coluna.status) {
@@ -27,6 +34,14 @@
         >
           @for (c of candidaturasDa(coluna.status); track c.id) {
             <div class="card" cdkDrag [cdkDragData]="c" cdkDragPreviewContainer="parent">
+              <div class="acoes-card" (pointerdown)="$event.stopPropagation()" (click)="$event.stopPropagation()">
+                <button type="button" class="acao-icone" (click)="abrirModal(c)" aria-label="Editar candidatura" title="Editar candidatura">
+                  <app-icon name="edit" />
+                </button>
+                <button type="button" class="acao-icone acao-excluir" (click)="excluir(c)" aria-label="Excluir candidatura" title="Excluir candidatura">
+                  <app-icon name="delete" />
+                </button>
+              </div>
               <h1>{{ c.empresa }}</h1>
               <p>{{ c.cargo }}</p>
               <div class="tecnologias">
@@ -40,7 +55,7 @@
                   <img src="date-icon.svg" alt="" />
                   <span class="data">{{ c.dataCandidatura | date: "d 'de' MMM y" }}</span>
                 </div>
-                <span class="site">{{ c.plataforma }}</span>
+                <span class="site">{{ rotuloPlataforma(c.plataforma) }}</span>
               </div>
             </div>
           }

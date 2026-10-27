@@ -1,0 +1,62 @@
+:host {
+  display: block;
+  min-width: 0;
+}
+
+.confirmacao {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  h2 {
+    font-size: 1.125rem;
+    line-height: 1.4;
+    overflow-wrap: anywhere;
+  }
+
+  p {
+    color: var(--cor-texto-suave);
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+  }
+}
+
+.botoes {
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 0.25rem;
+
+  button {
+    min-width: 5rem;
+    min-height: 2.75rem;
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--cor-borda);
+    border-radius: 0.5rem;
+    font: inherit;
+    cursor: pointer;
+
+    &:focus-visible {
+      outline: 2px solid var(--cor-destaque);
+      outline-offset: 2px;
+    }
+  }
+
+  .cancelar {
+    background: var(--cor-superficie);
+    color: var(--cor-texto);
+  }
+
+  .confirmar {
+    border-color: var(--cor-erro);
+    background: var(--cor-erro);
+    color: #fff;
+  }
+}
+
+@media (max-width: 30rem) {
+  .botoes {
+    button { flex: 1 1 6rem; }
+  }
+}

@@ -1,0 +1,8 @@
+<section class="confirmacao">
+  <h2 id="confirmacao-titulo">{{ data.title }}</h2>
+  <p id="confirmacao-mensagem">{{ data.message }}</p>
+  <div class="botoes">
+    <button type="button" class="cancelar" (click)="cancelar()">{{ data.cancelText }}</button>
+    <button type="button" class="confirmar" (click)="confirmar()">{{ data.confirmText }}</button>
+  </div>
+</section>

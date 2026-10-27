@@ -1,7 +1,7 @@
 <header class="cabecalho">
   <div>
-    <h2>Nova Candidatura</h2>
-    <p>Ela será adicionada à coluna "Candidatado".</p>
+    <h2>{{ editando ? 'Editar' : 'Nova' }} Candidatura</h2>
+    <p>{{ editando ? 'Atualize os dados da candidatura.' : 'Ela será adicionada à coluna "Candidatado".' }}</p>
   </div>
 
   <img src="close-icon.svg" alt="" (click)="closeModal()" />
@@ -35,8 +35,8 @@
       <label class="campo">
         <span>Plataforma</span>
         <select formControlName="plataforma">
-          @for (p of plataformas; track p) {
-            <option [value]="p">{{ p }}</option>
+          @for (p of plataformas; track p.valor) {
+            <option [value]="p.valor">{{ p.rotulo }}</option>
           }
         </select>
       </label>
@@ -77,10 +77,16 @@
     </label>
   </div>
 
+  @if (mensagemErro()) {
+    <p role="alert" class="mensagem-erro">{{ mensagemErro() }}</p>
+  }
+
   <hr class="divisor" />
 
   <footer class="rodape">
     <button type="button" class="btn-cancelar" (click)="closeModal()">Cancelar</button>
-    <button type="submit" class="btn-salvar">Salvar</button>
+    <button type="submit" class="btn-salvar" [disabled]="salvando()">
+      {{ salvando() ? 'Salvando…' : 'Salvar' }}
+    </button>
   </footer>
 </form>

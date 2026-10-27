@@ -1,10 +1,21 @@
 :host {
   display: block;
+  min-width: 0;
+  min-height: 0;
+  color: var(--cor-texto);
+}
+
+form {
+  display: flex;
+  min-height: 0;
+  flex-direction: column;
   color: var(--cor-texto);
 }
 
 .cabecalho {
-  margin-bottom: 20px;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
   display: flex;
   justify-content: space-between;
 
@@ -14,9 +25,14 @@
   p {
     font-size: 14px;
     color: var(--cor-texto-suave);
+    overflow-wrap: anywhere;
   }
 
   img {
+    flex: 0 0 auto;
+    min-width: 2.75rem;
+    min-height: 2.75rem;
+    padding: 0.75rem;
     cursor: pointer;
   }
 }
@@ -24,20 +40,28 @@
 .divisor {
   border: none;
   border-top: 1px solid var(--cor-borda);
-  margin: 16px -20px; // -20px nas laterais, igual ao padding do modal
+  margin: 1rem -1.25rem;
 }
 
 .rodape {
   display: flex;
   justify-content: flex-end;
-  gap: 12px;
-  padding: 0px 20px;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  padding: 0 1.25rem;
+}
+
+.mensagem-erro {
+  padding: 0 1.25rem;
+  color: var(--cor-erro);
+  font-size: 0.875rem;
+  overflow-wrap: anywhere;
 }
 
 .btn-cancelar,
 .btn-salvar {
-  height: 40px;
-  padding: 0 20px;
+  min-height: 2.75rem;
+  padding: 0.5rem 1.25rem;
   border-radius: 8px;
   font: inherit;
   font-size: 14px;
@@ -58,18 +82,20 @@
 
 // ---------- Formulário ----------
 .formulario {
-  height: 513px;
+  flex: 1 1 auto;
+  min-height: 0;
   display: flex;
   flex-direction: column;
   gap: 16px;
-  padding: 5px 20px;
+  padding: 0.3125rem 1.25rem;
   overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .linha {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1rem;
 }
 
 .campo {
@@ -79,7 +105,7 @@
   min-width: 0; // evita que um campo estique a coluna do grid
 
   > span {
-    font-size: 14px;
+    font-size: 0.875rem;
     font-weight: 500;
 
     b {
@@ -88,7 +114,7 @@
   }
 
   small {
-    font-size: 12px;
+    font-size: 0.8125rem;
     color: var(--cor-texto-mudo);
   }
 }
@@ -96,13 +122,14 @@
 input,
 select,
 textarea {
+  min-width: 0;
   width: 100%;
   padding: 10px 12px;
   border: 1px solid var(--cor-borda);
   border-radius: 8px;
   background: var(--cor-superficie-secundaria);
   font: inherit; // inputs não herdam a fonte por padrão
-  font-size: 14px;
+  font-size: 1rem;
   color: var(--cor-texto-campo);
   outline: none;
 
@@ -122,7 +149,7 @@ textarea {
 
 textarea {
   resize: vertical;
-  height: 66px;
+  min-height: 4.125rem;
 }
 
 // ---------- Chips de tecnologias ----------
@@ -144,7 +171,7 @@ textarea {
   // o input de dentro "some" para parecer parte do contêiner
   input {
     flex: 1;
-    min-width: 120px;
+    min-width: min(7.5rem, 100%);
     padding: 4px;
     border: none;
     background: transparent;
@@ -160,8 +187,8 @@ textarea {
   background: var(--cor-superficie);
   border: 1px solid var(--cor-borda);
   border-radius: 6px;
-  font-size: 12px;
-  white-space: nowrap;
+  font-size: 0.8125rem;
+  overflow-wrap: anywhere;
 
   button {
     border: none;
@@ -171,5 +198,22 @@ textarea {
     line-height: 1;
     color: var(--cor-texto-mudo);
     cursor: pointer;
+  }
+}
+
+@media (min-width: 48rem) {
+  .linha {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 47.999rem) {
+  .rodape {
+    padding: 0;
+
+    .btn-cancelar,
+    .btn-salvar {
+      flex: 1 1 8rem;
+    }
   }
 }

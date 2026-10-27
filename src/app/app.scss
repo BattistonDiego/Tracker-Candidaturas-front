@@ -1,39 +1,49 @@
 .shell {
   display: flex;
-  height: 100dvh;
-}
-.sidebar {
-  width: 240px;
-  flex-shrink: 0;
-  background-color: var(--cor-superficie);
-  border-right: 1px solid var(--cor-borda);
-  padding: 15px;
-  display: flex;
+  min-height: 100dvh;
   flex-direction: column;
-  justify-content: space-between;
+}
+
+.sidebar {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  background-color: var(--cor-superficie);
+  border-bottom: 1px solid var(--cor-borda);
+
+  > div:first-child {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: center;
+    gap: 0.375rem;
+    min-width: 0;
+  }
 
   .tracker-candidaturas,
   .quadro,
   .estatisticas {
-    width: 207px;
-    height: 36px;
-    font-size: 14px;
-    font-weight: 600;
     display: flex;
+    min-width: 0;
+    min-height: 2.75rem;
     align-items: center;
-    gap: 10px;
+    gap: 0.625rem;
+    font-size: 0.875rem;
+    font-weight: 600;
   }
 
   .tracker-candidaturas {
-    margin-bottom: 26px;
+    grid-column: 1 / -1;
+    overflow-wrap: anywhere;
   }
 
   .quadro,
   .estatisticas {
-    margin-bottom: 6px;
+    justify-content: center;
+    padding: 0.375rem;
+    border-radius: 0.5rem;
     color: var(--cor-texto-suave);
-    border-radius: 8px;
-    padding: 6px;
     text-decoration: none;
   }
 
@@ -44,32 +54,33 @@
   }
 
   .theme-selector {
-    width: 215px;
-    height: 38px;
-    border-radius: 8px;
-    border: 1px solid var(--cor-borda);
     display: flex;
-    justify-content: space-between;
+    width: max-content;
+    max-width: 100%;
+    min-height: 2.75rem;
     align-items: center;
-    padding: 5px;
-    font-size: 12px;
-    gap: 3px;
+    gap: 0.25rem;
+    padding: 0.25rem;
+    border: 1px solid var(--cor-borda);
+    border-radius: 0.5rem;
     background-color: var(--cor-superficie-secundaria);
+    font-size: 0.75rem;
 
     .light,
     .dark {
-      width: 50%;
-      height: 28px;
       display: flex;
+      min-height: 2.5rem;
       align-items: center;
-      gap: 5px;
       justify-content: center;
-      cursor: pointer;
+      gap: 0.3125rem;
+      padding: 0 0.5rem;
       border: 0;
-      border-radius: 6px;
+      border-radius: 0.375rem;
       background: transparent;
       color: var(--cor-texto-suave);
       font: inherit;
+      white-space: nowrap;
+      cursor: pointer;
     }
 
     .light.active,
@@ -79,8 +90,107 @@
     }
   }
 }
+
 .content {
   flex: 1;
   min-width: 0;
-  overflow: auto;
+}
+
+@media (min-width: 48rem) {
+  .shell {
+    flex-direction: row;
+  }
+
+  .sidebar {
+    width: 4.5rem;
+    flex: 0 0 4.5rem;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: 1fr auto;
+    align-items: start;
+    gap: 1rem;
+    padding: 1rem 0.5rem;
+    border-right: 1px solid var(--cor-borda);
+    border-bottom: 0;
+
+    > div:first-child {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .tracker-candidaturas,
+    .quadro,
+    .estatisticas {
+      width: 100%;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .tracker-candidaturas {
+      min-height: 3rem;
+      margin-bottom: 0.75rem;
+      font-size: 0;
+    }
+
+    .quadro,
+    .estatisticas {
+      font-size: 0;
+    }
+
+    .theme-selector {
+      width: 100%;
+      flex-direction: column;
+
+      .light,
+      .dark {
+        width: 100%;
+        padding: 0.5rem 0;
+        font-size: 0;
+      }
+    }
+  }
+
+  .content {
+    min-height: 100dvh;
+    overflow: auto;
+  }
+}
+
+@media (min-width: 64.0625rem) {
+  .sidebar {
+    width: 15rem;
+    flex-basis: 15rem;
+    padding: 0.9375rem;
+
+    > div:first-child {
+      display: block;
+    }
+
+    .tracker-candidaturas,
+    .quadro,
+    .estatisticas {
+      width: 100%;
+      justify-content: flex-start;
+      font-size: 0.875rem;
+    }
+
+    .tracker-candidaturas {
+      margin-bottom: 1.625rem;
+    }
+
+    .quadro,
+    .estatisticas {
+      margin-bottom: 0.375rem;
+    }
+
+    .theme-selector {
+      width: 100%;
+      flex-direction: row;
+
+      .light,
+      .dark {
+        width: 50%;
+        padding: 0 0.25rem;
+        font-size: 0.75rem;
+      }
+    }
+  }
 }

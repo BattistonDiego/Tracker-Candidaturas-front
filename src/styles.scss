@@ -49,15 +49,49 @@
 }
 
 body {
+  min-width: 0;
+  min-height: 100dvh;
   background: var(--cor-fundo);
   color: var(--cor-texto);
+  overflow-x: clip;
+}
+
+html,
+app-root {
+  max-width: 100%;
+  overflow-x: clip;
+}
+
+app-root {
+  display: block;
+  min-height: 100dvh;
 }
 
 .modal-nova-candidatura {
+  display: flex;
+  width: min(35rem, calc(100vw - 2rem));
+  max-width: calc(100vw - 2rem);
+  max-height: calc(100dvh - 2rem);
+  flex-direction: column;
   background: var(--cor-superficie);
   color: var(--cor-texto);
   border-radius: 16px;
   box-shadow: var(--sombra-modal);
   padding: 20px;
   overflow: hidden;
+}
+
+.modal-confirmacao {
+  display: flex;
+  width: min(28rem, calc(100vw - 2rem));
+  max-width: calc(100vw - 2rem);
+  max-height: calc(100dvh - 2rem);
+  flex-direction: column;
+  background: var(--cor-superficie);
+  color: var(--cor-texto);
+  border: 1px solid var(--cor-borda);
+  border-radius: 16px;
+  box-shadow: var(--sombra-modal);
+  padding: 1.25rem;
+  overflow: auto;
 }
